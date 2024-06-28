@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
+import { LoginService } from '../../services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface LoginForm {
   email: FormControl,
@@ -13,6 +15,7 @@ interface LoginForm {
   selector: 'app-login',
   standalone: true,
   imports: [DefaultLoginLayoutComponent, ReactiveFormsModule, PrimaryInputComponent],
+  providers: [LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -21,8 +24,8 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    //private loginService: LoginService,
-    //private toastService: ToastrService
+    private loginService: LoginService,
+    private toastService: ToastrService
   )
   {
     this.loginForm = new FormGroup({
@@ -32,10 +35,10 @@ export class LoginComponent {
   }
 
   submit(){
-    /*this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: () => this.toastService.success("Login feito com sucesso!"),
       error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
-    })*/
+    })
   }
 
   navigate(){
