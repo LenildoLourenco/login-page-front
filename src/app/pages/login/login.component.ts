@@ -36,13 +36,17 @@ export class LoginComponent {
 
   submit(){
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => this.toastService.success("Login successfully!"),
-      error: () => this.toastService.error("Unexpected error! Try again later")
+      next: () => {
+        this.toastService.success("Login successfully!");
+        this.router.navigate(["user"]);
+
+      },
+      error: () => this.toastService.error("Invalid Login and/or Password!")
     })
   }
 
   navigate(){
-    this.router.navigate(["signup"])
+    this.router.navigate(["signup"]);
   }
 
 }

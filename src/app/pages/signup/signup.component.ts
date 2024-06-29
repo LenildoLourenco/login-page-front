@@ -40,13 +40,16 @@ export class SignupComponent {
 
   submit(){
     this.loginService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe({
-      next: () => this.toastService.success("Registration done successfully!"),
+      next: () => {
+        this.toastService.success("Registration done successfully!");
+        this.router.navigate(["login"]);
+      },
       error: () => this.toastService.error("Unexpected error! Try again later")
     })
   }
 
   navigate(){
-    this.router.navigate(["login"])
+    this.router.navigate(["login"]);
   }
 
 }
